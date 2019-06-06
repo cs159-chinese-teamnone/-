@@ -1,8 +1,9 @@
 import numpy as np
-# 人脸检测器
+# 人脸检测器 定位haarcascade_frontalface_alt.xml
 faceCascade = cv2.CascadeClassifier("/Users/neolee/anaconda3/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_alt.xml")
 def detectFaces(image_name):
   img = cv2.imread(image_name)
+  #定位haarcascade_frontalface_default.xml
   face_cascade = cv2.CascadeClassifier("/Users/neolee/anaconda3/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_default.xml")
   if img.ndim == 3:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -37,10 +38,10 @@ if len(result)>0:
             minNeighbors=35,
             minSize=(25, 25)
             )
-        # 框出上扬的嘴角并对笑脸打上Smile标签
+        # 框出上扬的嘴角并对笑脸打上标签
         for (x2, y2, w2, h2) in smile:
             cv2.rectangle(roi_color, (x2, y2), (x2+w2, y2+h2), (255, 0, 0), 2)
-            cv2.putText(img,'Smile',(x,y-7), 3, 1.2, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(img,'Smile like a dog!',(x,y-7), 3, 1.2, (0, 255, 0), 2, cv2.LINE_AA)
     cv2.imshow('Smile?', img)
     c = cv2.waitKey(0)
     if k==27:
@@ -55,7 +56,7 @@ else:
 #keras风格迁移
 import numpy as np
 import pandas as pd
-from PIL import Image #先安装pillow包
+from PIL import Image #先安装pillow包，如error则先升级numpy再安装
 from keras import backend as K
 from keras.preprocessing.image import load_img, img_to_array
 from keras.applications import VGG16
@@ -68,9 +69,9 @@ import time
 ## Specify paths for 1) content image 2) style image and 3) generated image
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
-cImPath = ''#（jpg格式图片，原图）
-sImPath = ''#（jpg格式图片，风格图）
-genImOutputPath = 'output.jpg'
+cImPath = '1.jpg'#（jpg格式图片，原图）
+sImPath = 'fangao.jpg'#（jpg格式图片，风格图）
+genImOutputPath = 'output.jpg'#（输出图片）
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Image processing
@@ -95,7 +96,7 @@ gIm0 = preprocess_input(np.expand_dims(gIm0, axis=0))
 gImPlaceholder = K.placeholder(shape=(1, targetWidth, targetHeight, 3))
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-## Define loss and helper functions
+## Define loss and helper functions以下代码可不看
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
 def get_feature_reps(x, layer_names, model):
