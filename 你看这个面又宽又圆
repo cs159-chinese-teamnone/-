@@ -10,6 +10,8 @@ from keras.layers import Input
 from scipy.optimize import fmin_l_bfgs_b
 import time
 import random
+import pygame
+pygame.init()
 # 人脸检测器 定位haarcascade_frontalface_alt.xml
 faceCascade = cv2.CascadeClassifier("/Users/neolee/anaconda3/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_alt.xml")
 def detectFaces(image_name):
@@ -56,11 +58,13 @@ if len(result)>0:
             cv2.putText(img,word,(x,y-7), 3, 1.2, (0, 255, 0), 2, cv2.LINE_AA)
             cv2.imshow('Smile?', img)
             c = cv2.waitKey(0)
-            if k==27:
-                cv2.destroyAllWindows()
-            elif k==ord('s'):
-                cv2.imwrite('smile.jpg',img)
-                cv2.destroyAllWindows()
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_q:
+                        pygame.quit()
+                    elif event.key==pygame.K_s:
+                        cv2.imwrite('smile.jpg',img)
+                        pygame.quit()
         #风格迁移
         else:
             #keras风格迁移
@@ -197,7 +201,7 @@ if len(result)>0:
                 As = get_feature_reps(x=sImArr, layer_names=sLayerNames, model=sModel)
                 ws = np.ones(len(sLayerNames))/float(len(sLayerNames))
 
-                iterations = 600
+                iterations = 200
                 x_val = gIm0.flatten()
                 start = time.time()
                 xopt, f_val, info= fmin_l_bfgs_b(calculate_loss, x_val, fprime=get_grad,
