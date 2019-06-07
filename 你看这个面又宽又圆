@@ -54,7 +54,7 @@ if len(result)>0:
             result.append((x2,y2,x2+w2,y2+h2))
         if len(result)>0:
             model=['smile1','smile2','smile3']#语句库，可更改
-            word=model[random.randint(0,3)]
+            word=model[random.randint(0,2)]
             cv2.putText(img,word,(x,y-7), 3, 1.2, (0, 255, 0), 2, cv2.LINE_AA)
             cv2.imshow('Smile?', img)
             c = cv2.waitKey(0)
@@ -211,7 +211,7 @@ if len(result)>0:
                 end = time.time() 
 else:
     print('无人！')
-    break
+    
     
 
 
