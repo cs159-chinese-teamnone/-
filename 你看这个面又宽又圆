@@ -35,7 +35,7 @@ if len(result)>0:
     img = cv2.imread("4.jpg")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # 首先检测人脸，返回的是框住人脸的矩形框
+    # 首先检测人脸
     faces = faceCascade.detectMultiScale(gray,1.3,5,minSize=(55,55))
     # 画出每一个人脸，提取出人脸所在区域
     for (x, y, w, h) in faces:
@@ -47,18 +47,18 @@ if len(result)>0:
             minNeighbors=35,
             minSize=(25, 25)
             )
-        # 检测笑脸并打上标签
+        # 检测笑脸
         result=[]
         
         
         for (x2, y2, w2, h2) in smile:
             result.append((x2,y2,x2+w2,y2+h2))
-        if len(result)>0:##################如果检测出笑脸，则制成表情包，配文字
+        if len(result)>0:##################如果检测出笑脸，则制成表情包，配文字######################
             tag_if = input("请问您是否想要自行输入表情包配字？“是”请输入1，“否”请输入2：")
             if tag_if == "1":
                 word = input("请输入您想要的表情包配字：")
             elif tag_if == "2":
-                word_lib=['smile1','smile2','smile3']#语句库，可更改
+                word_lib=['smile1','smile2','smile3']#表情包配字语句库，可更改
                 word=word_lib[random.randint(0,2)]
                                                      #原来的代码cv2.putText#cv2无法添加中文文字和导入字体文件，所以用PIL
             fontpath = "font/simsun.ttc"
@@ -227,7 +227,7 @@ if len(result)>0:
                 xIm = save_original_size(xOut)
                 end = time.time() 
 else:
-    print('无人！')
+    
     
     
 
