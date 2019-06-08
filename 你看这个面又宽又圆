@@ -79,17 +79,13 @@ if len(result)>0:
             #keras风格迁移
 
 
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
             ## Specify paths for 1) content image 2) style image and 3) generated image
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
             cImPath = '1.jpg'#（jpg格式图片，原图）
             sImPath = 'fangao.jpg'#（jpg格式图片，风格图）
             genImOutputPath = 'output.jpg'#（输出图片）
 
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
             ## Image processing
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
             targetHeight = 512
             targetWidth = 512
             targetSize = (targetHeight, targetWidth)
@@ -108,9 +104,7 @@ if len(result)>0:
 
             gImPlaceholder = K.placeholder(shape=(1, targetWidth, targetHeight, 3))
 
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
-            ## Define loss and helper functions以下代码可不看
-            ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
+            ## Define loss and helper functions
 
             def get_feature_reps(x, layer_names, model):
                 featMatrices = []
