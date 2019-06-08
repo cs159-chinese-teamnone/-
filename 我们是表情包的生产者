@@ -246,7 +246,7 @@ if len(result)>0:
                 xIm = save_original_size(xOut)
                 end = time.time() 
 else:
-    
+    print("无人！")
     
     
 
